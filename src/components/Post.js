@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
+const marked = require("marked");
 
 class Post extends React.Component {
     constructor(props) {
@@ -10,11 +11,15 @@ class Post extends React.Component {
         post: []
       };
     }
+
+    getMarkup(content){
+      return {__html: marked(content)};
+    }
   
     componentDidMount() {
       const id = this.props.match.params.id;
       console.log(id);
-      fetch("http://localhost:8080/posts/" + id)
+      fetch("/api/posts/" + id + ".json")
         .then(res => res.json())
         .then(
           (result) => {
@@ -44,8 +49,11 @@ class Post extends React.Component {
       } else {
         return (
             <div className="post-container">
+                <span className="post-image"><img src={'/images/' + post.image}/></span>
                 <span className="post-title">{post.title}</span>
-                <span className="post-text">{post.text}</span>
+                <span className="post-text">
+                  <div dangerouslySetInnerHTML={this.getMarkup(post.content)} />
+                  </span>
             </div>
                 
         );

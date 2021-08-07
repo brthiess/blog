@@ -11,7 +11,7 @@ class Posts extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/posts")
+    fetch("/api/posts.json")
       .then((res) => res.json())
       .then(
         (result) => {
@@ -38,16 +38,21 @@ class Posts extends React.Component {
       return <div>Error: {error.message}</div>;
     } else {
       return (
-        <ul className="post-list">
+        <ul className="home-page-post-list">
           {posts.map((post) => (
-            <li className="post-item" key={post.id}>
-              <a className="post-item-link" href={"/post/" + post.id}></a>
-              <span className="post-title">{post.title}</span>
-              <span className="post-text">
-                {post.text.substring(0, 200)}...
+            <li className="home-page-post-item" key={post.url}>
+              <a className="home-page-post-item-link" href={"/posts/" + post.url}></a>
+              <span className="home-page-post-title">{post.title}</span>
+              <span className="home-page-post-date">{post.date}</span>
+              <span className="home-page-post-text">
+                {post.summary}
               </span>
-              <span className="post-image">
-                <img alt="blog post" src={post.image ?? "/stellar.png"} />
+              <span className="home-page-post-image">
+                <img alt="blog post" src={'/images/' + post.image ?? "/stellar.png"} />
+              </span>
+              <span className="home-page-post-author">
+                <img src="/images/me.png"/>
+                Brad Thiessen
               </span>
             </li>
           ))}
