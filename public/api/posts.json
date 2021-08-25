@@ -19,5 +19,12 @@
         "image": "dust.jpg",
         "date": "August 6, 2021",
         "url": "what-is-a-dusting-attack"
+    },
+    {
+        "title": "A Brief Intro to Javascript Closures",
+        "summary": "A brief intro to Javascript closures and a practical use case",
+        "image": "closure.jpg",
+        "date": "August 24th, 2021",
+        "url": "a-brief-intro-to-javascript-closures"
     }
 ]
